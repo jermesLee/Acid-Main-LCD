@@ -1,0 +1,82 @@
+/*
+ * --------------------
+ * Company             : LUOYANG GINGKO TECHNOLOGY CO.,LTD.
+                       : 洛阳银杏科技有限公司
+ * --------------------
+ * Project Name        : iCore3 usb_msc
+ * Description         : iCore3 usb_msc
+ * --------------------
+ * Tool Versions       : uVision V5.17.0.0
+ * Target Device       : STM32F407IGT6
+ * --------------------
+ * Engineer            : ysloveivy.
+ * Revision            : 0.01
+ * Created Date        : 2015.12.05
+ * --------------------
+ * Engineer            :
+ * Revision            :
+ * Modified Date       :
+ * --------------------
+ * Additional Comments :
+ *
+ * --------------------
+ */
+//--------------------------- Include ---------------------------//
+#include "..\include\led.h"
+#include "..\include\main.h"
+#include "..\include\usart.h"
+#include "..\fwlib\inc\stm32f4xx_gpio.h"
+
+#include "usbh_core.h"
+#include "usbh_usr.h"
+#include "usbh_msc_core.h"
+
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+//---------------------------- Define ---------------------------//
+
+//-------------------------- Variable ---------------------------//
+__ALIGN_BEGIN USBH_HOST                USB_Host __ALIGN_END;
+__ALIGN_BEGIN USB_OTG_CORE_HANDLE      USB_OTG_Core __ALIGN_END;
+
+//--------------------- Function Prototype ----------------------//
+
+//--------------------------- Function --------------------------//
+/*
+ * Name                : main
+ * Description         : ---
+ * Author              : ysloveivy.
+ *
+ * History
+ * --------------------
+ * Rev                 : 0.00
+ * Date                : 12/05/2015
+ * 
+ * create.
+ * --------------------
+ */
+int main(void)
+{
+	led.initialize();
+	usart4.initialize(115200);
+
+	usart4.printf("\x0c");                                   //清屏	
+	usart4.printf("\033[1;32;40m");                          //设置字体终端为绿色
+	usart4.printf("\r\n\r\nhello! I am iCore3!\r\n\r\n\r\n");
+
+	//usb初始化
+	USBH_Init(&USB_OTG_Core, 
+					USB_OTG_HS_CORE_ID,
+					&USB_Host,
+					&USBH_MSC_cb, 
+					&USR_cb);
+	
+	//usb处理，用户相关函数在usbh_usr.c文件中，文件读写在USBH_USR_MSC_Application()函数中
+	while(1){
+		USBH_Process(&USB_OTG_Core, &USB_Host);
+	}
+
+}

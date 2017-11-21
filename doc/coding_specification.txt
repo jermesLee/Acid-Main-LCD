@@ -1,0 +1,180 @@
+
+
+1.文件包含方式
+        不建议使用ucos的includes.h格式，可以单独引用C标准库、uCOS库及ST固件库；
+        C标准库根据需要添加；
+        uCOS库通常只需引用os.h；
+        ST固件库通常只需引用STM32FXXX.h；
+        避免头文件的循环包含；
+        
+2.文件格式
+        复制模板文件source_file_module.c和head_file_module.h
+    
+3.函数命名
+        函数名以模块名称开头，采用动词或动宾短语，模块名以下划线连接，动宾短语
+    单词首字母大写，不使用下划线（static 函数可以省略模块名，并以下划线分割函数
+    名以增强可读性）。除通用性缩写外，建议不使用缩写形式。
+
+4.变量命名
+        全局变量名以模块名称开头，不使用类型缩写，单词首字母大写，单词之间以下划
+    线连接。除通用性缩写外，建议不使用缩写形式。
+	
+41.变量类型名称
+		变量类型名称使用小写字母，以“_t”结尾。
+42.枚举常量
+		枚举常量使用小写字母，并以其类型名称开头，以下划线连接。
+    
+5.宏命名
+        宏的名称全部使用大写
+
+6.全局变量声明
+        全局变量在头文件中使用条件编译进行声明，避免人工维护变量定义和声明的一致性
+        在头文件中使用：
+        #ifndef XXX_XXX_H_
+        #define XXX_XXX_H_
+        
+        #ifdef   XXX_XXX_MODULE
+        #define  XXX_XXX_EXT
+        #else
+        #define  XXX_XXX_EXT  extern
+        #endif
+        
+        XXX_XXX_EXT int Xxx_Xxx_abc;
+        
+        #endif
+        
+        在源文件中使用：
+        #define XXX_XXX_MODULE
+        #include "xxx_xxx.h"
+        
+       
+7.通用性缩写
+
+    Addr    Address
+    adm     Administrator
+    app     Application
+    arg     Argument
+    asm     assemble
+    asyn    asynchronization
+    avg     average
+    DB      Database
+    bk      back
+    bmp     Bitmap
+    btn     Button
+    buf     Buffer
+    calc    Calculate
+    char    Character
+    chg     Change
+    clk     Click
+    clr     color
+    cmd     Command
+    cmp     Compare
+    col     Column
+    coord   coordinates
+    cpy     copy
+    ctl/ctrl Control
+    cur     Current
+    cyl     Cylinder
+    dbg     Debug
+    dbl     Double
+    dec     Decrease
+    def     default
+    del     Delete
+    dest/dst Destination
+    dev     Device
+    dict    dictionary
+    diff    different
+    dir     directory
+    disp    Display
+    div     Divide
+    dlg     Dialog
+    doc     Document
+    drv     Driver
+    dyna    Dynamic
+    env     Environment
+    err     error
+    ex/ext  Extend
+    exec    execute
+    flg     flag
+    frm     Frame
+    func/fn Function
+    grp     group
+    horz    Horizontal
+    idx/ndx Index
+    img     Image
+    impl    Implement
+    inc     Increase
+    info    Information
+    init    Initial/Initialize/Initialization
+    ins     Insert
+    inst    Instance
+    INT/intr Interrupt
+    len     Length
+    lib     Library
+    lnk     Link
+    log     logical
+    lst     List
+    max     maximum
+    mem     Memory
+    mgr/man Manage/Manager
+    mid     middle
+    min     minimum
+    msg     Message
+    mul     Multiply
+    num     Number
+    obj     Object
+    ofs     Offset
+    org     Origin/Original
+    param   Parameter
+    pic     picture
+    pkg     package
+    pkt     packect
+    pnt/pt  Point
+    pos     Position
+    pre/prev previous
+    prg     program
+    prn     Print
+    proc    Process/Procedure
+    prop    Properties
+    psw     Password
+    ptr     Pointer
+    pub     Public
+    rc      rect
+    ref     Reference
+    reg     Register
+    req     request
+    res     Resource
+    ret     return
+    rgn     region
+    scr     screen
+    sec     Second
+    seg     Segment
+    sel     Select
+    src     Source
+    std     Standard
+    stg     Storage
+    stm     Stream
+    str     String
+    sub     Subtract
+    sum     summation
+    svr     Server
+    sync    Synchronization
+    sys     System
+    tbl     Table
+    temp/tmp Temporary
+    tran/trans translate/transation/transparent
+    tst     Test
+    txt     Text
+    unk     Unknown
+    upd     Update
+    upg     Upgrade
+    util    Utility
+    var     Variable
+    ver     Version
+    vert    Vertical
+    vir     Virus
+    wnd     Window
+
+
+
+
